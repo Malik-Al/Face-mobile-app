@@ -6,7 +6,9 @@ export default new Vuex.Store({
   state: {
     id: null,
     username: null,
-    timerstart: null
+    timerstart: null,
+    timerstop: null,
+    active: null
   },
   mutations: {
     save_id (state, id) {
@@ -17,7 +19,13 @@ export default new Vuex.Store({
     },
     save_timerstart (state, timerstart) {
       state.timerstart = timerstart
-    }
+    },
+    save_timerstop (state, timerstop) {
+        state.timerstop = timerstop
+    },
+    save_active (state, active) {
+        state.active = active
+      }
   },
   actions: {
     save_id ({ commit }, id) {
@@ -28,7 +36,13 @@ export default new Vuex.Store({
     },
     save_timerstart ({ commit }, timerstart) {
       commit('save_timerstart', timerstart)
-    }
+    },
+    save_timerstop ({ commit }, timerstop) {
+        commit('save_timerstop', timerstop)
+    },
+    save_active ({ commit }, active) {
+        commit('save_active', active)
+      }
   },
   getters: {
     id (state) {
@@ -39,6 +53,12 @@ export default new Vuex.Store({
     },
     timerstart (state) {
       return state.timerstart
+    },
+    timerstop (state) {
+        return state.timerstop
+    },
+    active (state) {
+        return state.active
     }
   },
   modules: {

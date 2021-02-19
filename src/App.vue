@@ -4,7 +4,7 @@
       <q-toolbar>
       </q-toolbar>
     </q-header>
-
+    <router-view/>
     <q-page-container>
       <Camera />
     </q-page-container>
@@ -15,7 +15,13 @@
 import Camera from './components/Camera.vue'
 
 export default {
+  computed: {
+    layout () {
+      return (this.$route.meta.layout || 'empty') + '-layout'
+    }
+  },
   name: 'LayoutDefault',
+
 
   components: {
     Camera
@@ -30,4 +36,5 @@ export default {
 </script>
 
 <style>
+
 </style>
