@@ -1,16 +1,18 @@
 <template>
-  <q-page class="flex flex-center">
-      <div>
-          <div id="videoElement"><video autoplay="true" ref="video"></video></div>
-            <div class="center">
-              <q-input outlined type="text" v-model="input" label="Username" />
-                <q-btn @click="sendImg" color="primary" size="18px" text-color="white" label="Start"/>
-                <q-btn v-if="resetButton" @click="getPicture" size="18px" color="green" label="Снимок"/>
-              <q-btn v-else @click="playVid" size="18px" color="purple" label="Переснять"/>
-            </div>
-          <div class="submenu"><canvas ref="canvas"></canvas></div>
-       </div>
-  </q-page>
+  <q-page-container>
+    <q-page class="flex flex-center">
+        <div>
+            <div id="videoElement"><video autoplay="true" ref="video"></video></div>
+              <div class="center">
+                <q-input outlined type="text" v-model="input" label="Username" />
+                  <q-btn @click="sendImg" color="primary" size="18px" text-color="white" :label="buttonLabel"/>
+                  <q-btn v-if="resetButton" @click="Photoft" size="18px" color="green" label="Снимок"/>
+                <q-btn v-else @click="playVid" size="18px" color="purple" label="Переснять"/>
+              </div>
+            <div class="submenu"><canvas ref="canvas"></canvas></div>
+        </div>
+    </q-page>
+  </q-page-container>   
 </template>
 
 <script>
@@ -21,7 +23,8 @@ export default {
   data () {
     return{
       input: '',
-      resetButton: true
+      resetButton: true,
+      photo: null
     }
   },
     computed: {
@@ -30,9 +33,14 @@ export default {
       'username',
       'timerstart',
       'timerstop',
-      'active'
+      'active',
+      'resultime'
     ]),
-
+    buttonLabel () {
+      let label = 'start'
+      if (this.active) label = 'stop'
+      return label
+    }
   },
   mounted () {
     const video = this.$refs.video
@@ -52,7 +60,8 @@ export default {
       userName: 'save_username',
       save_timerstart: 'save_timerstart',
       save_timerstop: 'save_timerstop',
-      save_active: 'save_active'
+      save_active: 'save_active',
+      save_resultime: 'save_resultime'
     }),
     startTimer () {
       axios({
@@ -66,9 +75,11 @@ export default {
         this.save_timerstart(res.data.start)
         this.save_timerstop(res.data.stop)
         this.save_active(res.data.active)
+        this.save_resultime(res.data.time)
         console.log(this.active)
         console.log(this.timerstart)
         console.log(this.timerstop)
+        console.log(this.resultime)
       })
     },
     async getPicture () {
@@ -92,11 +103,20 @@ export default {
         }, 'image/jpeg')
       })
     },
-    async sendImg () {
+    async Photoft (){
       const imgSend = await this.getPicture()
+      this.photo = imgSend
+    },
+    async sendImg () {
+      console.log('test')
+      if (!this.photo){
+        alert('No photo')
+        return
+      }
       const formData = new FormData()
-      formData.append('image', new File([imgSend], 'image.jpg'))
+      formData.append('image', new File([this.photo], 'image.jpg'))
       formData.append('username', this.input)
+      console.log(this.photo)
       this.$q.loading.show()
       await axios({
         method: 'post',
@@ -112,6 +132,7 @@ export default {
         this.startTimer()
         // this.$router.push('/calendar')
         this.$q.loading.hide()
+        this.resetButton = true
       })
     },
     pauseVid () {

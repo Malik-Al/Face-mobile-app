@@ -10,15 +10,14 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
-    children: [
-      {
-        path: '/calendar',
-        name: 'calendar',
-        meta: { layout: 'main' },
-        component: () => import('../components/Сalendar.vue')
-      }
-    ],
-  }
+  },
+  {
+    path: '/calendar',
+    name: 'calendar',
+    meta: { layout: 'main' },
+    component: () => import('../views/Сalendar.vue')
+
+  },
 ]
 
 const router = new VueRouter({

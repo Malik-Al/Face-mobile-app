@@ -8,7 +8,8 @@ export default new Vuex.Store({
     username: null,
     timerstart: null,
     timerstop: null,
-    active: null
+    active: null,
+    resultime: null
   },
   mutations: {
     save_id (state, id) {
@@ -25,7 +26,10 @@ export default new Vuex.Store({
     },
     save_active (state, active) {
         state.active = active
-      }
+    },
+    save_resultime (state, resultime) {
+        state.resultime = resultime
+    }
   },
   actions: {
     save_id ({ commit }, id) {
@@ -42,7 +46,10 @@ export default new Vuex.Store({
     },
     save_active ({ commit }, active) {
         commit('save_active', active)
-      }
+    },
+    save_resultime ({ commit }, resultime) {
+        commit('save_resultime', resultime)
+    }
   },
   getters: {
     id (state) {
@@ -59,6 +66,9 @@ export default new Vuex.Store({
     },
     active (state) {
         return state.active
+    },
+    resultime (state) {
+        return state.resultime
     }
   },
   modules: {
