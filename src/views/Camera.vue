@@ -1,18 +1,18 @@
 <template>
-  <q-page-container>
-    <q-page class="flex flex-center">
-        <div>
-            <div id="videoElement"><video autoplay="true" ref="video"></video></div>
-              <div class="center">
-                <q-input outlined type="text" v-model="input" label="Username" />
-                  <q-btn @click="sendImg" color="primary" size="18px" text-color="white" :label="buttonLabel"/>
-                  <q-btn v-if="resetButton" @click="Photoft" size="18px" color="green" label="Снимок"/>
-                <q-btn v-else @click="playVid" size="18px" color="purple" label="Переснять"/>
-              </div>
-            <div class="submenu"><canvas ref="canvas"></canvas></div>
-        </div>
-    </q-page>
-  </q-page-container>   
+      <q-page-container>
+        <q-page class="flex flex-center">
+            <div class="fon-content">
+                <div id="videoElement"><video autoplay="true" ref="video"></video></div>
+                  <div class="center">
+                    <q-input outlined type="text" v-model="input" label="Username" />
+                      <q-btn @click="sendImg" color="primary" size="18px" text-color="white" :label="buttonLabel"/>
+                      <q-btn v-if="resetButton" @click="Photoft" size="18px" color="green" label="Снимок"/>
+                    <q-btn v-else @click="playVid" size="18px" color="purple" label="Переснять"/>
+                  </div>
+                <div class="submenu"><canvas ref="canvas"></canvas></div>
+            </div>
+        </q-page>
+    </q-page-container>   
 </template>
 
 <script>
@@ -159,5 +159,22 @@ body{
 .center{
   text-align: center;
 }
+
+@media screen and (max-width: 600px) {
+   video {
+    width:100%;
+    padding: 5%;
+  }
+}
+@media screen and (max-width: 600px) {
+   .center {
+    width:100%;
+    padding: 5%;
+  }
+}
+.fon-content{
+  border: 10px solid black;
+}
+
 
 </style>
