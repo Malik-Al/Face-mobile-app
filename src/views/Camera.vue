@@ -160,16 +160,15 @@ body{
   text-align: center;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 700px) {
    video {
     width:100%;
     padding: 5%;
   }
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 700px) {
    .center {
     width:100%;
-    padding: 5%;
   }
 }
 .fon-content{
