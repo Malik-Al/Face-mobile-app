@@ -76,10 +76,7 @@ export default {
         this.save_timerstop(res.data.stop)
         this.save_active(res.data.active)
         this.save_resultime(res.data.time)
-        let Noactiv = 'Вы не активны'
-        if (this.active)
-        Noactiv = 'Вы активны'
-        return alert(Noactiv)
+        this.alertActiv()
         // console.log(this.active)
         // console.log(this.timerstart)
         // console.log(this.timerstop)
@@ -148,6 +145,12 @@ export default {
       const vid = this.$refs.video
       vid.play()
       this.photo = false
+    },
+    alertActiv(){
+      let Noactiv = 'Вы не активны'
+      if (this.active)
+        Noactiv = 'Вы активны'
+      return alert(Noactiv)
     },
   },
 }
