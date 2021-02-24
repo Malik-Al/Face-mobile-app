@@ -108,7 +108,6 @@ export default {
       this.photo = imgSend
     },
     async sendImg () {
-      console.log('test')
       if (!this.photo){
         alert('No photo')
         return
@@ -133,6 +132,7 @@ export default {
         // this.$router.push('/calendar')
         this.$q.loading.hide()
         this.resetButton = true
+        this.playVid()
       })
     },
     pauseVid () {
@@ -143,6 +143,8 @@ export default {
       this.resetButton = true
       const vid = this.$refs.video
       vid.play()
+      this.photo = false
+      console.log(this.photo)
     },
   },
 }
