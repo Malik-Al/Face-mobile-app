@@ -76,10 +76,14 @@ export default {
         this.save_timerstop(res.data.stop)
         this.save_active(res.data.active)
         this.save_resultime(res.data.time)
-        console.log(this.active)
-        console.log(this.timerstart)
-        console.log(this.timerstop)
-        console.log(this.resultime)
+        let Noactiv = 'Вы не активны'
+        if (this.active)
+        Noactiv = 'Вы активны'
+        return alert(Noactiv)
+        // console.log(this.active)
+        // console.log(this.timerstart)
+        // console.log(this.timerstop)
+        // console.log(this.resultime)
       })
     },
     async getPicture () {
@@ -144,7 +148,6 @@ export default {
       const vid = this.$refs.video
       vid.play()
       this.photo = false
-      console.log(this.photo)
     },
   },
 }
@@ -163,7 +166,6 @@ body{
 @media screen and (max-width: 700px) {
    video {
     width:100%;
-    padding: 5%;
   }
 }
 @media screen and (max-width: 700px) {
@@ -171,7 +173,7 @@ body{
     width:100%;
   }
 }
-.fon-content{
+video{
   border: 10px solid black;
 }
 
