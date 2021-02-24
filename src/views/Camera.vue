@@ -34,7 +34,8 @@ export default {
       'timerstart',
       'timerstop',
       'active',
-      'resultime'
+      'resultime',
+      'createdUser'
     ]),
     buttonLabel () {
       let label = 'start'
@@ -61,7 +62,8 @@ export default {
       save_timerstart: 'save_timerstart',
       save_timerstop: 'save_timerstop',
       save_active: 'save_active',
-      save_resultime: 'save_resultime'
+      save_resultime: 'save_resultime',
+      save_createdUser: 'save_createdUser'
     }),
     startTimer () {
       axios({
@@ -128,13 +130,20 @@ export default {
       }).then((res) => {
         console.log(res.data)
         this.saveId(res.data._id ? res.data._id : res.data)
+        this.save_createdUser(res.data.createdAt)
         this.userName(this.input)
         this.startTimer()
         // this.$router.push('/calendar')
         this.$q.loading.hide()
         this.resetButton = true
+        this.createdAtUser()
         this.playVid()
       })
+    },
+    createdAtUser(){
+      if (this.createdUser){
+        console.log('Вы зарегистрировались')
+      }
     },
     pauseVid () {
       const vid = this.$refs.video
